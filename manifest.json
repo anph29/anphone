@@ -1,0 +1,21 @@
+{
+  "manifest_version": 2,
+  "name": "Anphone",
+  "description": "Anph once tool",
+  "version": "1.0",
+  "author": "Anph",
+  "browser_action": {
+    "default_icon": "anphone.png",
+    "default_title": "Anphone",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "activeTab"
+  ]
+}
