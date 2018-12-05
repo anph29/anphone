@@ -1,4 +1,5 @@
 # anphone
 
-This is an extendsion Chrome will help find all phone number from any web page!
-Goodluck!
+# This is an extendsion Chrome!
+## This maybe help you extend your sight about phone number you can see in any web page!
+# Goodluck!
