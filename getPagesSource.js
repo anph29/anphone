@@ -2,8 +2,9 @@
 // Demo: var serialized_html = DOMtoString(document);
 
 function DOMtoString(document_root) {
-    var html = '',
-        node = document_root.firstChild;
+    var node = document_root.firstChild,
+        html = node.innerText;
+
     while (node) {
         switch (node.nodeType) {
             case Node.ELEMENT_NODE:

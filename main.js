@@ -1,18 +1,19 @@
 chrome.runtime.onMessage.addListener(function (request, sender) {
   if (request.action == "getSource") {
     //|(5[689])
-    const matched = request.source.match(/(0((3[2-9])|(7[06-9])|(8[1-5])|(9[0-9])))+([0-9]{7})\b/g),
-      matchedSet = new Set(matched);
-
-
-    message.innerText = Array.from(matchedSet).join(';;');
+    const regex = /(0|\+84)(\s|\.)?((3[2-9])|(7[06-9])|(8[1-5])|(9[0-9]))([0-9]{1})(\s|\.)?([0-9]{3})(\s|\.)?([0-9]{3})\b/g,
+      matched = request.source.match(regex),
+      matchedSet = new Set(matched),
+      anphoneArr = Array.from(matchedSet);
+    if (!anphoneArr.length)
+      anphone += 'Not found!';
+    else
+      anphoneArr.forEach(no => { anphone.innerHTML += `<li>${no}</li>` })
   }
 });
 
-function onWindowLoad() {
-
+window.onload = () => {
   var message = document.querySelector('#message');
-
   chrome.tabs.executeScript(null, {
     file: "getPagesSource.js"
   }, function () {
@@ -22,8 +23,6 @@ function onWindowLoad() {
     }
   });
 
-}
-
-window.onload = onWindowLoad;
+};
 
 
