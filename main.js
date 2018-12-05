@@ -1,7 +1,7 @@
 chrome.runtime.onMessage.addListener(function (request, sender) {
   if (request.action == "getSource") {
     //|(5[689])
-    const regex = /(0|\+84)(\s|\.)?((3[2-9])|(7[06-9])|(8[1-5])|(9[0-9]))([0-9]{1})(\s|\.)?([0-9]{3})(\s|\.)?([0-9]{3})\b/g,
+    const regex = /(0|o|O|\+84)(\s|\.)?((3[2-9])|(7[0oO6-9])|(8[1-5])|(9[oO0-9]))([oO0-9]{1})(\s|\.)?([oO0-9]{3})(\s|\.)?([oO0-9]{3})\b/g,
       matched = request.source.match(regex),
       matchedSet = new Set(matched),
       anphoneArr = Array.from(matchedSet);
