@@ -1,3 +1,4 @@
 # anphone
 
-extend Chrome find all phone number from any web page!
+This is an extendsion Chrome will help find all phone number from any web page!
+Goodluck!
