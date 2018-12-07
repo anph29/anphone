@@ -9,12 +9,10 @@
     "default_title": "Anphone",
     "default_popup": "popup.html"
   },
-  "background": {
-    "scripts": [
-      "background.js"
-    ],
-    "persistent": false
-  },
+  "web_accessible_resources": [
+    "data/*.json",
+    "data/*.txt"
+  ],
   "permissions": [
     "activeTab"
   ]
