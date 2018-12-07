@@ -1,7 +1,8 @@
 chrome.runtime.onMessage.addListener(function (request, sender) {
   if (request.action == "getSource") {
     //|(5[689])
-    const regex = /(0|o|O|\+84)(\s|\.)?((3[2-9])|(7[0oO6-9])|(8[1-5])|(9[oO0-9]))([oO0-9]{1})(\s|\.)?([oO0-9]{3})(\s|\.)?([oO0-9]{3})\b/g,
+    const regex = // /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/gi,
+      /(0|o|O|\+84)(\s|\.)?((3[2-9])|(7[0oO6-9])|(8[1-5])|(9[oO0-9]))([oO0-9]{1})(\s|\.)?([oO0-9]{3})(\s|\.)?([oO0-9]{3})\b/g,//phone
       //1. all match  
       matched = request.source.match(regex),
       //2. đeuplicated
@@ -34,7 +35,7 @@ const getExistedFilter = callback => {
     .then(callback);
 };
 
-const getExistedFilterByTxt = callback => {
+const updateFilter = callback => {
   const url = chrome.runtime.getURL('data/stub.txt');
   fetch(url)
     .then(response => response) //assuming file contains json

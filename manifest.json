@@ -10,8 +10,7 @@
     "default_popup": "popup.html"
   },
   "web_accessible_resources": [
-    "data/*.json",
-    "data/*.txt"
+    "data/*.json"
   ],
   "permissions": [
     "activeTab"
