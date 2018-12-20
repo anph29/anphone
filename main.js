@@ -7,12 +7,15 @@ chrome.runtime.onMessage.addListener(function (request, sender) {
       matched = request.source.match(regex),
       //2. đeuplicated
       matchedSet = new Set(matched),
-      //. convert to array to use
-      anphoneArr = Array.from(matchedSet);
-    if (!anphoneArr.length) anphone += 'Not found!';
+      //3. convert to array to use
+      anphoneArr = Array.from(matchedSet)
+        .map(no => no.replace(/[.\s]/g, '').replace('+84', '0'));
+
+    if (!anphoneArr.length) anphone += '<li>Not found!</li>';
     else getExistedFilter(filterLs => {//filter existed
-      anphoneArr.filter(matched => -1 === filterLs.indexOf(matched))
-        .forEach(no => { anphone.innerHTML += `<li>${no.replace(/[.\s]/g, '')}</li>` })
+      const withoutMatched = anphoneArr.filter(matched => -1 === filterLs.indexOf(matched))
+      if (!withoutMatched.length) anphone += '<li>Not found!</li>';
+      else withoutMatched.forEach(no => { anphone.innerHTML += `<li>${no}</li>` })
     })
   }
 });
