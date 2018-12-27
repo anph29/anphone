@@ -5,14 +5,13 @@ chrome.runtime.onMessage.addListener(function (request, sender) {
       proccessHTMLData(request.source);
       break;
     case 'endScroll':
-      clearInterval(time);
       _GO();
       break;
   }
 });
 
 document.addEventListener('DOMContentLoaded', function () {
-  time = setInterval(function () { chrome.tabs.executeScript(null, { file: 'scrollDown.js' }); }, 1000);
+  time = chrome.tabs.executeScript(null, { file: 'scrollDown.js' });
 
   document.getElementById('btn_go').addEventListener('click', e => {
     _GO();
