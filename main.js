@@ -9,7 +9,11 @@ chrome.runtime.onMessage.addListener(function (request, sender) {
       matchedSet = new Set(matched),
       //3. convert to array to use
       anphoneArr = Array.from(matchedSet)
-        .map(no => no.replace(/[.\s]/g, '').replace('+84', '0'));
+        .map(no => no
+          .replace(/[.\s]/g, '')
+          .replace(/(\+84|o|O)/g, '0')
+          );
+
     if (!anphoneArr.length) anphone += '<li>Not found!</li>';
     else getExistedFilter(filterLs => {//filter existed
       const withoutMatched = anphoneArr.filter(matched => -1 === filterLs.indexOf(matched))
