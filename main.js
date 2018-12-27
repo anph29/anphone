@@ -26,7 +26,7 @@ window.onload = () => {
   var toggle = false;
   var time;
   toggle = !toggle;
-  if (toggle) time = setInterval(function () { chrome.tabs.executeScript(null, { code: 'window.scrollBy(0, 1000);' }); }, 1000);
+  if (toggle) time = setInterval(function () { chrome.tabs.executeScript(null, { code: 'window.window.scrollBy({  top: 5000, behavior: \'smooth\'});' }); }, 1000);
   else {
     clearInterval(time);
 
