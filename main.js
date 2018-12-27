@@ -10,7 +10,6 @@ chrome.runtime.onMessage.addListener(function (request, sender) {
       //3. convert to array to use
       anphoneArr = Array.from(matchedSet)
         .map(no => no.replace(/[.\s]/g, '').replace('+84', '0'));
-
     if (!anphoneArr.length) anphone += '<li>Not found!</li>';
     else getExistedFilter(filterLs => {//filter existed
       const withoutMatched = anphoneArr.filter(matched => -1 === filterLs.indexOf(matched))
@@ -20,24 +19,29 @@ chrome.runtime.onMessage.addListener(function (request, sender) {
   }
 });
 window.onload = () => {
-  var message = document.querySelector('#message');
-  chrome.tabs.executeScript(null, {
-    file: "getPagesSource.js"
-  }, function () {
-    // If you try and inject into an extensions page or the webstore/NTP you'll get an error
-    if (chrome.runtime.lastError) {
-      message.innerText = 'There was an error injecting script : \n' + chrome.runtime.lastError.message;
-    }
-  });
-};
+  var toggle = false;
+  var time;
+  toggle = !toggle;
+  if (toggle) time = setInterval(function () { chrome.tabs.executeScript(null, { code: 'window.scrollBy(0, 1000);' }); }, 1000);
+  else {
+    clearInterval(time);
 
+    ///////////////////////////////
+    var message = document.querySelector('#message');
+    chrome.tabs.executeScript(null, { file: "getPagesSource.js" }, () => {
+      // If you try and inject into an extensions page or the webstore/NTP you'll get an error
+      if (chrome.runtime.lastError) {
+        message.innerText = 'There was an error injecting script : \n' + chrome.runtime.lastError.message;
+      }
+    });
+  }
+};
 const getExistedFilter = callback => {
   const url = chrome.runtime.getURL('data/filter.json');
   fetch(url)
     .then(response => response.json()) //assuming file contains json
     .then(callback);
 };
-
 const updateFilter = callback => {
   const url = chrome.runtime.getURL('data/stub.txt');
   fetch(url)
