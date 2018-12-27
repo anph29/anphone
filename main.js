@@ -46,6 +46,7 @@ const proccessHTMLData = source => {
   if (!anphoneArr.length) anphone += '<li>Not found!</li>';
   else getExistedFilter(filterLs => {//filter existed
     const withoutMatched = anphoneArr.filter(matched => -1 === filterLs.indexOf(matched))
+    anphone.innerHTML = "";
     if (!withoutMatched.length) anphone += '<li>Not found!</li>';
     else withoutMatched.forEach(no => { anphone.innerHTML += `<li>${no}</li>` })
   })
