@@ -29,7 +29,7 @@ const _GO = () => {
 const proccessHTMLData = source => {
   //|(5[689])
   const regex = // /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/gi,
-    /(0|o|O|\+84)(\s|\.)?((3[2-9])|(7[0oO6-9])|(8[1-5])|(9[oO0-9]))([oO0-9]{1})(\s|\.)?([oO0-9]{3})(\s|\.)?([oO0-9]{3})\b/g,//phone
+    /\s(0|o|O|\+84)(\s|\.)?((3[2-9])|(7[0oO6-9])|(8[1-5])|(9[oO0-9]))([oO0-9]{1})(\s|\.)?([oO0-9]{3})(\s|\.)?([oO0-9]{3})\b/g,//phone
     //1. all match  
     matched = source.match(regex),
     //2. đeuplicated
@@ -57,7 +57,7 @@ const getExistedFilter = callback => {
     .then(response => response.json()) //assuming file contains json
     .then(callback);
 };
-const updateFilter = callback => {
+const updateFilter = () => {
   const url = chrome.runtime.getURL('data/stub.txt');
   fetch(url)
     .then(response => response) //assuming file contains json
