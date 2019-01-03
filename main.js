@@ -47,7 +47,7 @@ const proccessHTMLData = source => {
     if (!withoutMatched.length) anphone += '<li>Not found!</li>';
     else {
       txt_anph.value = JSON.stringify(withoutMatched).slice(1, -1);
-      withoutMatched.map(no => { anphone.innerHTML += `<li>${no}</li>` })
+      withoutMatched.forEach(no => { anphone.innerHTML += `<li>${no}</li>` })
     }
   })
 }
