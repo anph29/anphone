@@ -13,9 +13,8 @@ chrome.runtime.onMessage.addListener(function (request, sender) {
 document.addEventListener('DOMContentLoaded', function () {
   time = chrome.tabs.executeScript(null, { file: 'scrollDown.js' });
 
-  document.getElementById('btn_go').addEventListener('click', e => {
-    _GO();
-  })
+  document.getElementById('btn_go').addEventListener('click', e => { _GO() })
+  document.getElementById('selectable').addEventListener('click', e => { selectText('selectable') })
 });
 
 const _GO = () => {
@@ -31,6 +30,7 @@ const proccessHTMLData = source => {
   //|(5[689])
   const regex = // /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/gi,
     /(0|o|O|\+84)(\s|\.)?((3[2-9])|(7[0oO6-9])|(8[1-5])|(9[oO0-9]))([oO0-9]{1})(\s|\.)?([oO0-9]{3})(\s|\.)?([oO0-9]{3})\b/g,//phone
+
     //1. all match  
     matched = source.match(regex),
     //2. đeuplicated
@@ -63,4 +63,17 @@ const updateFilter = callback => {
     .then(function (txt) {
       console.log(txt)
     });
+}
+
+const selectText = containerid => {
+  if (document.selection) { // IE
+    var range = document.body.createTextRange();
+    range.moveToElementText(document.getElementById(containerid));
+    range.select();
+  } else if (window.getSelection) {
+    var range = document.createRange();
+    range.selectNode(document.getElementById(containerid));
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+  }
 }
